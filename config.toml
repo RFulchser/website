@@ -6,6 +6,7 @@ title = "Robs Tech Tricks"
 disqusShortname = "hugo-theme-stack"
 DefaultContentLanguage = "en"
 hasCJKLanguage = false
+googleAnalytics = "G-910NVGSC5T"
 
 [languages.en]
 languageName = "English"
