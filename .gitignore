@@ -22,8 +22,5 @@ _testmain.go
 *.exe
 *.test
 
-public
-resources
-
 assets/jsconfig.json
 .DS_Store
