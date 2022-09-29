@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Guide for creating and customizing Autounattend.xml files'><title>Windows Autounattend.xml Guide</title>
+
+<link rel='canonical' href='https://robstechtricks.com/p/windows-autounattend.xml-guide/'>
+
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='Windows Autounattend.xml Guide'>
+<meta property='og:description' content='Guide for creating and customizing Autounattend.xml files'>
+<meta property='og:url' content='https://robstechtricks.com/p/windows-autounattend.xml-guide/'>
+<meta property='og:site_name' content='Robs Tech Tricks'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Windows' /><meta property='article:tag' content='Automation' /><meta property='article:tag' content='Autounattend' /><meta property='article:tag' content='Scripts' /><meta property='article:published_time' content='2022-09-28T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-09-28T00:00:00&#43;00:00'/><meta property='og:image' content='https://robstechtricks.com/p/windows-autounattend.xml-guide/usb-hdd-desk.jpg' />
+<meta name="twitter:title" content="Windows Autounattend.xml Guide">
+<meta name="twitter:description" content="Guide for creating and customizing Autounattend.xml files"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://robstechtricks.com/p/windows-autounattend.xml-guide/usb-hdd-desk.jpg' />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-910NVGSC5T"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-910NVGSC5T', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu520394992277039b3da912c1fb2a848c_11090_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Robs Tech Tricks</a></h1>
+            <h2 class="site-description">multiskilled hardware prep engineer expanding my skills in scripting and automation</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/RFulchser'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.linkedin.com/in/robert-fulscher-826519101/'
+                        target="_blank"
+                        title="Linkedin"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="4" y="4" width="16" height="16" rx="2" />
+  <line x1="8" y1="11" x2="8" y2="16" />
+  <line x1="8" y1="8" x2="8" y2="8.01" />
+  <line x1="12" y1="16" x2="12" y2="11" />
+  <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/windows-autounattend.xml-guide/">
+                <img src="/p/windows-autounattend.xml-guide/usb-hdd-desk_hu7482c343c74b96659ae30ce78d669200_781716_800x0_resize_q75_box.jpg"
+                        srcset="/p/windows-autounattend.xml-guide/usb-hdd-desk_hu7482c343c74b96659ae30ce78d669200_781716_800x0_resize_q75_box.jpg 800w, /p/windows-autounattend.xml-guide/usb-hdd-desk_hu7482c343c74b96659ae30ce78d669200_781716_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="589" 
+                        loading="lazy"
+                        alt="Featured image of post Windows Autounattend.xml Guide" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/windows/" >
+                Windows
+            </a>
+        
+            <a href="/categories/automation/" >
+                Automation
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/windows-autounattend.xml-guide/">Windows Autounattend.xml Guide</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Guide for creating and customizing Autounattend.xml files
+        </h3>
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Sep 28, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    12 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="windows-autounattend-history">Windows Autounattend History</h2>
+<p>unattend files have been in use for a long time, all the way back to windows xp. They allow you to skip the repetitive task of setting up a new computer and installing windows with minimal user interaction. Using a simple XML file to tell windows exactly what you want to do everything from formatting the hard drive to setting up users and even running scripts at first login.</p>
+<h2 id="overview">Overview</h2>
+<p>We will go over the easiest way to get a starter xml file and customizing it to our needs with windows system image manager. I will also go over how to get the answer file to use the windows key that is stored in the bios of many computer&rsquo;s.</p>
+<h2 id="starter-autounattendxml">Starter Autounattend.xml</h2>
+<p>The easiest way to get a basic xml file with a lot of the work already done is to go to <a class="link" href="https://www.windowsafg.com/"  target="_blank" rel="noopener"
+    >https://www.windowsafg.com/</a>. An amazing website that lets you easily fill in the info and get a basic file that is perfect to start with. Navigate to the version of windows you want to generate a file for I chose windows 10 UEFI. Fill out the file to what you want I recommend leaving the computer name and password blank. When we plug the file into WSIM we can set the password and windows will hash the password as to not leave a plain text password in the file. The file I generated is bellow I trimmed the comments as they are not needed and can sometimes cause the install to fail. Copy the xml and save it for editing later make sure its named Autounattend.xml.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;unattend</span> <span class="na">xmlns=</span><span class="s">&#34;urn:schemas-microsoft-com:unattend&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;settings</span> <span class="na">pass=</span><span class="s">&#34;windowsPE&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-International-Core-WinPE&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;SetupUILanguage&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;UILanguage&gt;</span>en-US<span class="nt">&lt;/UILanguage&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/SetupUILanguage&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;InputLocale&gt;</span>0409:00000409<span class="nt">&lt;/InputLocale&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;SystemLocale&gt;</span>en-US<span class="nt">&lt;/SystemLocale&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;UILanguage&gt;</span>en-US<span class="nt">&lt;/UILanguage&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;UILanguageFallback&gt;</span>en-US<span class="nt">&lt;/UILanguageFallback&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;UserLocale&gt;</span>en-US<span class="nt">&lt;/UserLocale&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-Setup&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;DiskConfiguration&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Disk</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;DiskID&gt;</span>0<span class="nt">&lt;/DiskID&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;WillWipeDisk&gt;</span>true<span class="nt">&lt;/WillWipeDisk&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;CreatePartitions&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;CreatePartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Order&gt;</span>1<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Type&gt;</span>Primary<span class="nt">&lt;/Type&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Size&gt;</span>300<span class="nt">&lt;/Size&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/CreatePartition&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;CreatePartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Order&gt;</span>2<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Type&gt;</span>EFI<span class="nt">&lt;/Type&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Size&gt;</span>100<span class="nt">&lt;/Size&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/CreatePartition&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;CreatePartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Order&gt;</span>3<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Type&gt;</span>MSR<span class="nt">&lt;/Type&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Size&gt;</span>128<span class="nt">&lt;/Size&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/CreatePartition&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;CreatePartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Order&gt;</span>4<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Type&gt;</span>Primary<span class="nt">&lt;/Type&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Extend&gt;</span>true<span class="nt">&lt;/Extend&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/CreatePartition&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/CreatePartitions&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;ModifyPartitions&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;ModifyPartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Order&gt;</span>1<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;PartitionID&gt;</span>1<span class="nt">&lt;/PartitionID&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Label&gt;</span>WINRE<span class="nt">&lt;/Label&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Format&gt;</span>NTFS<span class="nt">&lt;/Format&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;TypeID&gt;</span>DE94BBA4-06D1-4D40-A16A-BFD50179D6AC<span class="nt">&lt;/TypeID&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/ModifyPartition&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;ModifyPartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Order&gt;</span>2<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;PartitionID&gt;</span>2<span class="nt">&lt;/PartitionID&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Label&gt;</span>System<span class="nt">&lt;/Label&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Format&gt;</span>FAT32<span class="nt">&lt;/Format&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/ModifyPartition&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;ModifyPartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Order&gt;</span>3<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;PartitionID&gt;</span>3<span class="nt">&lt;/PartitionID&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/ModifyPartition&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;ModifyPartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Order&gt;</span>4<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;PartitionID&gt;</span>4<span class="nt">&lt;/PartitionID&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Label&gt;</span>OS<span class="nt">&lt;/Label&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Letter&gt;</span>C<span class="nt">&lt;/Letter&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Format&gt;</span>NTFS<span class="nt">&lt;/Format&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/ModifyPartition&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/ModifyPartitions&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Disk&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/DiskConfiguration&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;ImageInstall&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;OSImage&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;InstallTo&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;DiskID&gt;</span>0<span class="nt">&lt;/DiskID&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;PartitionID&gt;</span>4<span class="nt">&lt;/PartitionID&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/InstallTo&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;InstallToAvailablePartition&gt;</span>false<span class="nt">&lt;/InstallToAvailablePartition&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/OSImage&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/ImageInstall&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;UserData&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;ProductKey&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Key&gt;&lt;/Key&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;WillShowUI&gt;</span>Never<span class="nt">&lt;/WillShowUI&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/ProductKey&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;AcceptEula&gt;</span>true<span class="nt">&lt;/AcceptEula&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;FullName&gt;</span>Robert<span class="nt">&lt;/FullName&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Organization&gt;&lt;/Organization&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/UserData&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/settings&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;settings</span> <span class="na">pass=</span><span class="s">&#34;offlineServicing&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-LUA-Settings&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;EnableLUA&gt;</span>false<span class="nt">&lt;/EnableLUA&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/settings&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;settings</span> <span class="na">pass=</span><span class="s">&#34;generalize&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-Security-SPP&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;SkipRearm&gt;</span>1<span class="nt">&lt;/SkipRearm&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/settings&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;settings</span> <span class="na">pass=</span><span class="s">&#34;specialize&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-International-Core&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;InputLocale&gt;</span>0409:00000409<span class="nt">&lt;/InputLocale&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;SystemLocale&gt;</span>en-US<span class="nt">&lt;/SystemLocale&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;UILanguage&gt;</span>en-US<span class="nt">&lt;/UILanguage&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;UILanguageFallback&gt;</span>en-US<span class="nt">&lt;/UILanguageFallback&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;UserLocale&gt;</span>en-US<span class="nt">&lt;/UserLocale&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-Security-SPP-UX&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;SkipAutoActivation&gt;</span>true<span class="nt">&lt;/SkipAutoActivation&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-SQMApi&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;CEIPEnabled&gt;</span>0<span class="nt">&lt;/CEIPEnabled&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-Shell-Setup&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;ComputerName&gt;&lt;/ComputerName&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;ProductKey&gt;</span>W269N-WFGWX-YVC9B-4J6C9-T83GX<span class="nt">&lt;/ProductKey&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/settings&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;settings</span> <span class="na">pass=</span><span class="s">&#34;oobeSystem&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-Shell-Setup&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;AutoLogon&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Password&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Value&gt;&lt;/Value&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;PlainText&gt;</span>true<span class="nt">&lt;/PlainText&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Password&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Enabled&gt;</span>true<span class="nt">&lt;/Enabled&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Username&gt;</span>Robert<span class="nt">&lt;/Username&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/AutoLogon&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;OOBE&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;HideEULAPage&gt;</span>true<span class="nt">&lt;/HideEULAPage&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;HideOEMRegistrationScreen&gt;</span>true<span class="nt">&lt;/HideOEMRegistrationScreen&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;HideOnlineAccountScreens&gt;</span>true<span class="nt">&lt;/HideOnlineAccountScreens&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;HideWirelessSetupInOOBE&gt;</span>true<span class="nt">&lt;/HideWirelessSetupInOOBE&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;NetworkLocation&gt;</span>Work<span class="nt">&lt;/NetworkLocation&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;SkipUserOOBE&gt;</span>true<span class="nt">&lt;/SkipUserOOBE&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;SkipMachineOOBE&gt;</span>true<span class="nt">&lt;/SkipMachineOOBE&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;ProtectYourPC&gt;</span>1<span class="nt">&lt;/ProtectYourPC&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/OOBE&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;UserAccounts&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;LocalAccounts&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;LocalAccount</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Password&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Value&gt;&lt;/Value&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;PlainText&gt;</span>true<span class="nt">&lt;/PlainText&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Password&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Description&gt;&lt;/Description&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;DisplayName&gt;</span>Robert<span class="nt">&lt;/DisplayName&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Group&gt;</span>Administrators<span class="nt">&lt;/Group&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Name&gt;</span>Robert<span class="nt">&lt;/Name&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/LocalAccount&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/LocalAccounts&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/UserAccounts&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;RegisteredOrganization&gt;&lt;/RegisteredOrganization&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;RegisteredOwner&gt;</span>Robert<span class="nt">&lt;/RegisteredOwner&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;DisableAutoDaylightTimeSet&gt;</span>false<span class="nt">&lt;/DisableAutoDaylightTimeSet&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;FirstLogonCommands&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;SynchronousCommand</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Description&gt;</span>Control Panel View<span class="nt">&lt;/Description&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Order&gt;</span>1<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;CommandLine&gt;</span>reg add &#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel&#34; /v StartupPage /t REG_DWORD /d 1 /f<span class="nt">&lt;/CommandLine&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;RequiresUserInput&gt;</span>true<span class="nt">&lt;/RequiresUserInput&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/SynchronousCommand&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;SynchronousCommand</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Order&gt;</span>2<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Description&gt;</span>Control Panel Icon Size<span class="nt">&lt;/Description&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;RequiresUserInput&gt;</span>false<span class="nt">&lt;/RequiresUserInput&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;CommandLine&gt;</span>reg add &#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel&#34; /v AllItemsIconView /t REG_DWORD /d 0 /f<span class="nt">&lt;/CommandLine&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/SynchronousCommand&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;SynchronousCommand</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Order&gt;</span>3<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;RequiresUserInput&gt;</span>false<span class="nt">&lt;/RequiresUserInput&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;CommandLine&gt;</span>cmd /C wmic useraccount where name=&#34;Robert&#34; set PasswordExpires=false<span class="nt">&lt;/CommandLine&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Description&gt;</span>Password Never Expires<span class="nt">&lt;/Description&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/SynchronousCommand&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/FirstLogonCommands&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;TimeZone&gt;</span>Central Standard Time<span class="nt">&lt;/TimeZone&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/settings&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/unattend&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="install-windows-system-image-manager">Install Windows System Image Manager</h2>
+<p>The tool with a long and unassuming name is actually very useful once get the hang of it. you can download it from the <a class="link" href="https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install"  target="_blank" rel="noopener"
+    >Windows ADK</a>. choose the installer for the windows version you plan to install I am using the windows 10 version 2004 and later. run the install and you will only need the deployment toolkit that is what comes with WSIM.
+<img src="/p/windows-autounattend.xml-guide/adksetup.png"
+	width="744"
+	height="521"
+	srcset="/p/windows-autounattend.xml-guide/adksetup_huaaf7035cbc6b745baa83349a1e4eb911_35280_480x0_resize_box_3.png 480w, /p/windows-autounattend.xml-guide/adksetup_huaaf7035cbc6b745baa83349a1e4eb911_35280_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="142"
+		data-flex-basis="342px"
+	
+></p>
+<h2 id="download-windows-iso">Download Windows ISO</h2>
+<p>I&rsquo;m sure you know how to get a windows iso but something that you may not know is windows has 2 different formats for the main install file. They have the .wim and .esp, if you use the windows media creation tool you will get an iso with a .esp file and will need to convert it to a .wim file to use it with WSIM. For some reason Microsoft hides the best way to download an iso and only lets you see it if your using a linux or mac os. To get past this go to the download page <a class="link" href="https://www.microsoft.com/en-us/software-download/windows10"  target="_blank" rel="noopener"
+    >Windows 10 Download</a> and just trick the website into thinking your using a mac. You can do this in chrome by going to Developer Tools/Sources click the three dots and then more tools/network conditions. unselect the use browser default under user agent and select Chrome - Mac. Then refresh the page and you will be greeted with a download link to a direct iso download with a .wim file as the install file.</p>
+<h2 id="wsim">WSIM</h2>
+<p>The official windows tool to create and edit Autounattend files, it has a lot of option&rsquo;s and can be a little confusing at first glance. Once you get used to WSIM it can be easy to add/remove feature&rsquo;s and get your deployment off the ground with little effort.
+Once you open WSIM go to file and open the answer file we generated earlier and you will also need to right click on the windows image pane to add your install.wim file. the file is located in the windows iso you downloaded sources/install.wim when that load&rsquo;s WSIM should look like this.</p>
+<p><img src="/p/windows-autounattend.xml-guide/wsim1.jpg"
+	width="1920"
+	height="1040"
+	srcset="/p/windows-autounattend.xml-guide/wsim1_hufa75fafc90988e6ad4ef7789980f7ed4_276758_480x0_resize_q75_box.jpg 480w, /p/windows-autounattend.xml-guide/wsim1_hufa75fafc90988e6ad4ef7789980f7ed4_276758_1024x0_resize_q75_box.jpg 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="184"
+		data-flex-basis="443px"
+	
+>
+Now look at all those options, luckily the file we generated did most of the work for us. Feel free to poke around and look through the options on the windows image pane. You can add all kinds of custom settings that way and the best resource for finding what they do is <a class="link" href="https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/components-b-unattendicrosoft"  target="_blank" rel="noopener"
+    >Microsoft Docs</a> There you will find more info on all the custom options used for creating an unattend file.</p>
+<h2 id="customization-tips">Customization Tips</h2>
+<p>Our goal is to get a minimal touch install that will run a  bootstrap script to further customize the install. There are a few things we&rsquo;ll need to know about the machine we intend to deploy too. First thing is what kind of device are we deploying, if it&rsquo;s a OEM workstation from lenovo or dell it will have a windows key imbedded in the bios and we can use that to activate windows. We also need to know how many drives are in the system. If there is only one drive we can use the disk configuration section to wipe all the drives and install windows automatically. If there are more than one I would recommend just removing the disk configuration section, from my experience the unattend file will fail to select the proper drive to install to and could wipe a drive that you don&rsquo;t intend to. In that case its just easier to select that stuff manually to avoid failing out of the unattended install.
+You can also set a password in WSIM for the user and for autologin if you save the file it will encode the password into Base64. This is a nice feature but wont stop anyone who is determined from decoding the string and reading the password. I would recommend not setting the password to anything that is used for anything critical or sensitive. also don&rsquo;t store the answer file anywhere that can be easily accessed.</p>
+<h2 id="install-with-bios-product-key">Install With Bios Product Key</h2>
+<p>To get windows to grab the key from the bios, that is in most OEM machines such as dell and lenovo is pretty easy. All you need to do is set the product key value to &ldquo;[KEY]&rdquo; in amd64_Microsoft-Windows-Setup_neutral/UserData/ProductKey. It should look like this
+<img src="/p/windows-autounattend.xml-guide/wsim-productkey.png"
+	width="571"
+	height="143"
+	srcset="/p/windows-autounattend.xml-guide/wsim-productkey_huc4498e77ccf181cdce08c095059398d0_5956_480x0_resize_box_3.png 480w, /p/windows-autounattend.xml-guide/wsim-productkey_huc4498e77ccf181cdce08c095059398d0_5956_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="399"
+		data-flex-basis="958px"
+	
+>
+We also need to make sure to remove the Productkey value is blank in amd64_Microsoft-Windows-Shell-Setup_neatural under 4 specialize section. It will only work if the key is set in the one location.
+If you are using a machine such as a vm or a machine with no key, you can leave the key as is. The file we generated uses a temp key from Microsoft that will let you install windows unattended without activating windows. you can also use the above setup and if it cannot find a key it will show the dialog box to enter a key, and you can just select &lsquo;I have no windows key&rsquo; and the unattended install will continue without issue.</p>
+<h2 id="removing-disk-configuration">Removing Disk Configuration</h2>
+<p>If the computer your deploying has multiple drives or you don&rsquo;t know the drive array, it is usually best to remove the disk configuration section. This way we can avoid errors and make sure the drives are setup properly. all you will need to do is remove this section from the unattended file</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl">            <span class="nt">&lt;DiskConfiguration&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;Disk</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;DiskID&gt;</span>0<span class="nt">&lt;/DiskID&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;WillWipeDisk&gt;</span>true<span class="nt">&lt;/WillWipeDisk&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;CreatePartitions&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;CreatePartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Order&gt;</span>1<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Type&gt;</span>Primary<span class="nt">&lt;/Type&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Size&gt;</span>300<span class="nt">&lt;/Size&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;/CreatePartition&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;CreatePartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Order&gt;</span>2<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Type&gt;</span>EFI<span class="nt">&lt;/Type&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Size&gt;</span>100<span class="nt">&lt;/Size&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;/CreatePartition&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;CreatePartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Order&gt;</span>3<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Type&gt;</span>MSR<span class="nt">&lt;/Type&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Size&gt;</span>128<span class="nt">&lt;/Size&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;/CreatePartition&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;CreatePartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Order&gt;</span>4<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Type&gt;</span>Primary<span class="nt">&lt;/Type&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Extend&gt;</span>true<span class="nt">&lt;/Extend&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;/CreatePartition&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;/CreatePartitions&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;ModifyPartitions&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;ModifyPartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Order&gt;</span>1<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;PartitionID&gt;</span>1<span class="nt">&lt;/PartitionID&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Label&gt;</span>WINRE<span class="nt">&lt;/Label&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Format&gt;</span>NTFS<span class="nt">&lt;/Format&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;TypeID&gt;</span>DE94BBA4-06D1-4D40-A16A-BFD50179D6AC<span class="nt">&lt;/TypeID&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;/ModifyPartition&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;ModifyPartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Order&gt;</span>2<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;PartitionID&gt;</span>2<span class="nt">&lt;/PartitionID&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Label&gt;</span>System<span class="nt">&lt;/Label&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Format&gt;</span>FAT32<span class="nt">&lt;/Format&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;/ModifyPartition&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;ModifyPartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Order&gt;</span>3<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;PartitionID&gt;</span>3<span class="nt">&lt;/PartitionID&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;/ModifyPartition&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;ModifyPartition</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Order&gt;</span>4<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;PartitionID&gt;</span>4<span class="nt">&lt;/PartitionID&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Label&gt;</span>OS<span class="nt">&lt;/Label&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Letter&gt;</span>C<span class="nt">&lt;/Letter&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Format&gt;</span>NTFS<span class="nt">&lt;/Format&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;/ModifyPartition&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;/ModifyPartitions&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/Disk&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/DiskConfiguration&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;ImageInstall&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;OSImage&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;InstallTo&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;DiskID&gt;</span>0<span class="nt">&lt;/DiskID&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;PartitionID&gt;</span>4<span class="nt">&lt;/PartitionID&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;/InstallTo&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;InstallToAvailablePartition&gt;</span>false<span class="nt">&lt;/InstallToAvailablePartition&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/OSImage&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/ImageInstall&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>It will show a couple more dialog boxes during initial setup but will also save you a lot of headache trying to figure out why the install is failing.</p>
+<h2 id="run-scripts-at-first-login">Run Scripts at First Login</h2>
+<p>You can setup the file to run commands or scripts at first login, this is perfect for running a bootstrap config script to finish customizing windows. You can add commands in the oobeSystem section under FirstLoginCommands and add synchronous command. I like having it run scripts from a network share drive. There is one problem with doing this, a lot of the time when windows first boot&rsquo;s it takes a minute for the network connection to initialize. To get around that I just have it run a powershell  command to sleep for 2 mins then it will continue to run the rest of the scripts/commands. After that you can have it install programs or run scripts that sitting on your network drive making it easy to make changes or add onto the install script.</p>
+<h2 id="final-autounattendxml-file">Final Autounattend.xml File</h2>
+<p>After all that my file look like this, this will get you past a lot of the repetitive tasks for installing windows. That way we can focus on other stuff, like finding more things to automate with scripting.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;unattend</span> <span class="na">xmlns=</span><span class="s">&#34;urn:schemas-microsoft-com:unattend&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;settings</span> <span class="na">pass=</span><span class="s">&#34;windowsPE&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-International-Core-WinPE&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;SetupUILanguage&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;UILanguage&gt;</span>en-US<span class="nt">&lt;/UILanguage&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/SetupUILanguage&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;InputLocale&gt;</span>0409:00000409<span class="nt">&lt;/InputLocale&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;SystemLocale&gt;</span>en-US<span class="nt">&lt;/SystemLocale&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;UILanguage&gt;</span>en-US<span class="nt">&lt;/UILanguage&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;UILanguageFallback&gt;</span>en-US<span class="nt">&lt;/UILanguageFallback&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;UserLocale&gt;</span>en-US<span class="nt">&lt;/UserLocale&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-Setup&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;UserData&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;ProductKey&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;Key&gt;</span>[KEY]<span class="nt">&lt;/Key&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;WillShowUI&gt;</span>OnError<span class="nt">&lt;/WillShowUI&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/ProductKey&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;AcceptEula&gt;</span>true<span class="nt">&lt;/AcceptEula&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;FullName&gt;</span>Robert<span class="nt">&lt;/FullName&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;Organization&gt;&lt;/Organization&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/UserData&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/settings&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;settings</span> <span class="na">pass=</span><span class="s">&#34;offlineServicing&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-LUA-Settings&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;EnableLUA&gt;</span>false<span class="nt">&lt;/EnableLUA&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/settings&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;settings</span> <span class="na">pass=</span><span class="s">&#34;generalize&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-Security-SPP&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;SkipRearm&gt;</span>1<span class="nt">&lt;/SkipRearm&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/settings&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;settings</span> <span class="na">pass=</span><span class="s">&#34;specialize&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-International-Core&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;InputLocale&gt;</span>0409:00000409<span class="nt">&lt;/InputLocale&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;SystemLocale&gt;</span>en-US<span class="nt">&lt;/SystemLocale&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;UILanguage&gt;</span>en-US<span class="nt">&lt;/UILanguage&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;UILanguageFallback&gt;</span>en-US<span class="nt">&lt;/UILanguageFallback&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;UserLocale&gt;</span>en-US<span class="nt">&lt;/UserLocale&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-Security-SPP-UX&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;SkipAutoActivation&gt;</span>true<span class="nt">&lt;/SkipAutoActivation&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-SQMApi&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;CEIPEnabled&gt;</span>0<span class="nt">&lt;/CEIPEnabled&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/settings&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;settings</span> <span class="na">pass=</span><span class="s">&#34;oobeSystem&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;component</span> <span class="na">name=</span><span class="s">&#34;Microsoft-Windows-Shell-Setup&#34;</span> <span class="na">processorArchitecture=</span><span class="s">&#34;amd64&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">language=</span><span class="s">&#34;neutral&#34;</span> <span class="na">versionScope=</span><span class="s">&#34;nonSxS&#34;</span> <span class="na">xmlns:wcm=</span><span class="s">&#34;http://schemas.microsoft.com/WMIConfig/2002/State&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;AutoLogon&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;Password&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;Value&gt;</span>UwB1AHAAZQByAFMAZQBjAHIAZQB0AFAAYQBzAHMAdwBvAHIAZABQAGEAcwBzAHcAbwByAGQA<span class="nt">&lt;/Value&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;PlainText&gt;</span>false<span class="nt">&lt;/PlainText&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/Password&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;Enabled&gt;</span>true<span class="nt">&lt;/Enabled&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;Username&gt;</span>Robert<span class="nt">&lt;/Username&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;LogonCount&gt;</span>3<span class="nt">&lt;/LogonCount&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/AutoLogon&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;OOBE&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;HideEULAPage&gt;</span>true<span class="nt">&lt;/HideEULAPage&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;HideOEMRegistrationScreen&gt;</span>true<span class="nt">&lt;/HideOEMRegistrationScreen&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;HideOnlineAccountScreens&gt;</span>true<span class="nt">&lt;/HideOnlineAccountScreens&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;HideWirelessSetupInOOBE&gt;</span>true<span class="nt">&lt;/HideWirelessSetupInOOBE&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;NetworkLocation&gt;</span>Work<span class="nt">&lt;/NetworkLocation&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;SkipUserOOBE&gt;</span>true<span class="nt">&lt;/SkipUserOOBE&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;SkipMachineOOBE&gt;</span>true<span class="nt">&lt;/SkipMachineOOBE&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;ProtectYourPC&gt;</span>1<span class="nt">&lt;/ProtectYourPC&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/OOBE&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;UserAccounts&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;LocalAccounts&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;LocalAccount</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;Password&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;Value&gt;</span>UwB1AHAAZQByAFMAZQBjAHIAZQB0AFAAYQBzAHMAdwBvAHIAZABQAGEAcwBzAHcAbwByAGQA<span class="nt">&lt;/Value&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;PlainText&gt;</span>false<span class="nt">&lt;/PlainText&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;/Password&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;Description&gt;&lt;/Description&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;DisplayName&gt;</span>Robert<span class="nt">&lt;/DisplayName&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;Group&gt;</span>Administrators<span class="nt">&lt;/Group&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;Name&gt;</span>Robert<span class="nt">&lt;/Name&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;/LocalAccount&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/LocalAccounts&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/UserAccounts&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;RegisteredOrganization&gt;&lt;/RegisteredOrganization&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;RegisteredOwner&gt;</span>Robert<span class="nt">&lt;/RegisteredOwner&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;DisableAutoDaylightTimeSet&gt;</span>false<span class="nt">&lt;/DisableAutoDaylightTimeSet&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;FirstLogonCommands&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;SynchronousCommand</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;Description&gt;</span>Control Panel View<span class="nt">&lt;/Description&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;Order&gt;</span>1<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;CommandLine&gt;</span>reg add &#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel&#34; /v StartupPage /t REG_DWORD /d 1 /f<span class="nt">&lt;/CommandLine&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;RequiresUserInput&gt;</span>true<span class="nt">&lt;/RequiresUserInput&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/SynchronousCommand&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;SynchronousCommand</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;Order&gt;</span>2<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;Description&gt;</span>Control Panel Icon Size<span class="nt">&lt;/Description&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;RequiresUserInput&gt;</span>false<span class="nt">&lt;/RequiresUserInput&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;CommandLine&gt;</span>reg add &#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel&#34; /v AllItemsIconView /t REG_DWORD /d 0 /f<span class="nt">&lt;/CommandLine&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/SynchronousCommand&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;SynchronousCommand</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;Order&gt;</span>3<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;RequiresUserInput&gt;</span>false<span class="nt">&lt;/RequiresUserInput&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;CommandLine&gt;</span>cmd /C wmic useraccount where name=&#34;Robert&#34; set PasswordExpires=false<span class="nt">&lt;/CommandLine&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;Description&gt;</span>Password Never Expires<span class="nt">&lt;/Description&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/SynchronousCommand&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;SynchronousCommand</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;CommandLine&gt;</span>Powershell -C Start-Sleep -Seconds 120<span class="nt">&lt;/CommandLine&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;Description&gt;</span>Wait for Network Connection<span class="nt">&lt;/Description&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;Order&gt;</span>4<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;RequiresUserInput&gt;</span>false<span class="nt">&lt;/RequiresUserInput&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/SynchronousCommand&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;SynchronousCommand</span> <span class="na">wcm:action=</span><span class="s">&#34;add&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;CommandLine&gt;</span>Powershell -ExecutionPolicy bypass -File <span class="ni">&amp;quot;</span>\\[netowork drive]\installscript.ps1<span class="nt">&lt;/CommandLine&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;Description&gt;</span>Run Install Script<span class="nt">&lt;/Description&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;Order&gt;</span>5<span class="nt">&lt;/Order&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;RequiresUserInput&gt;</span>true<span class="nt">&lt;/RequiresUserInput&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/SynchronousCommand&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/FirstLogonCommands&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;TimeZone&gt;</span>Central Standard Time<span class="nt">&lt;/TimeZone&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/component&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/settings&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;cpi:offlineImage</span> <span class="na">cpi:source=</span><span class="s">&#34;wim:c:/users/robert/documents/windows%20images/win10_21h2_english_x64%20-%201/sources/install.wim#Windows 10 Pro&#34;</span> <span class="na">xmlns:cpi=</span><span class="s">&#34;urn:schemas-microsoft-com:cpi&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/unattend&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="useful-links">Useful Links</h2>
+<p><a class="link" href="https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install"  target="_blank" rel="noopener"
+    >https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install</a>
+<a class="link" href="https://www.microsoft.com/en-us/software-download/windows10"  target="_blank" rel="noopener"
+    >https://www.microsoft.com/en-us/software-download/windows10</a>
+<a class="link" href="https://www.windowsafg.com/"  target="_blank" rel="noopener"
+    >https://www.windowsafg.com/</a>
+<a class="link" href="https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/components-b-unattendicrosoft"  target="_blank" rel="noopener"
+    >https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/components-b-unattendicrosoft</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/windows/">Windows</a>
+        
+            <a href="/tags/automation/">Automation</a>
+        
+            <a href="/tags/autounattend/">Autounattend</a>
+        
+            <a href="/tags/scripts/">Scripts</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2022 Robs Tech Tricks
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#windows-autounattend-history">Windows Autounattend History</a></li>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#starter-autounattendxml">Starter Autounattend.xml</a></li>
+    <li><a href="#install-windows-system-image-manager">Install Windows System Image Manager</a></li>
+    <li><a href="#download-windows-iso">Download Windows ISO</a></li>
+    <li><a href="#wsim">WSIM</a></li>
+    <li><a href="#customization-tips">Customization Tips</a></li>
+    <li><a href="#install-with-bios-product-key">Install With Bios Product Key</a></li>
+    <li><a href="#removing-disk-configuration">Removing Disk Configuration</a></li>
+    <li><a href="#run-scripts-at-first-login">Run Scripts at First Login</a></li>
+    <li><a href="#final-autounattendxml-file">Final Autounattend.xml File</a></li>
+    <li><a href="#useful-links">Useful Links</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
