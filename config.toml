@@ -47,14 +47,15 @@ rssFullContent = true
     # enabled = true
     # default = "Licensed under CC BY-NC-SA 4.0"
 
-  # [params.comments]
-  # enabled = true
-  # provider = "disqus"
+  [params.comments]
+  enabled = true
+  provider = "utterances"
 
   #   [params.comments.disqusjs]
 
-  #   [params.comments.utterances]
-  #   issueTerm = "pathname"
+    [params.comments.utterances]
+    issueTerm = "title"
+    repo = "RFulscher/website-utterances-comments"
 
   #   [params.comments.remark42]
 
