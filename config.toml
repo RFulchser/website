@@ -54,8 +54,8 @@ rssFullContent = true
   #   [params.comments.disqusjs]
 
     [params.comments.utterances]
-    issueTerm = "title"
-    repo = "RFulscher/website-utterances-comments"
+    issueTerm = "pathname"
+    repo = "RFulchser/website-utterance-comments"
 
   #   [params.comments.remark42]
 
