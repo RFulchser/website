@@ -7,6 +7,7 @@ aliases:
   - about
   - contact
 lastmod: '2022-09-20'
+comments: false
 menu:
     main: 
         weight: -90
